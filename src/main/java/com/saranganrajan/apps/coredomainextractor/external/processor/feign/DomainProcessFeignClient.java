@@ -11,5 +11,5 @@ import java.util.List;
 @FeignClient(name="core-domain-processor", url="http://localhost:8080")
 public interface DomainProcessFeignClient {
     @PostMapping(path = "/policy/premium/pay")
-    ResponseEntity<String> processPolicyTransaction(@RequestBody List<PolicyTransaction> policies);
+    ResponseEntity<List<PolicyTransaction>> processPolicyTransaction(@RequestBody List<PolicyTransaction> policies);
 }
