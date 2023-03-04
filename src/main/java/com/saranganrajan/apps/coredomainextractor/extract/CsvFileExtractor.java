@@ -1,8 +1,7 @@
 package com.saranganrajan.apps.coredomainextractor.extract;
 
-import com.saranganrajan.apps.coredomainextractor.external.processor.feign.DomainProcessFeignClient;
+import com.saranganrajan.apps.coredomainextractor.external.processor.feign.CoreProcessFeignClient;
 import com.saranganrajan.apps.coredomainextractor.model.PolicyTransaction;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
@@ -18,9 +17,9 @@ import java.util.stream.Collectors;
 public class CsvFileExtractor implements FileExtractor {
 
     @Autowired
-    private DomainProcessFeignClient feignClient;
+    private CoreProcessFeignClient feignClient;
 
-    public CsvFileExtractor(DomainProcessFeignClient feignClient) {
+    public CsvFileExtractor(CoreProcessFeignClient feignClient) {
         this.feignClient = feignClient;
     }
 
@@ -45,7 +44,7 @@ public class CsvFileExtractor implements FileExtractor {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                FileUtils.moveFileToDirectory(policyFile, destinationFolder, false);
+                //FileUtils.moveFileToDirectory(policyFile, destinationFolder, false);
             }
         }
     }
