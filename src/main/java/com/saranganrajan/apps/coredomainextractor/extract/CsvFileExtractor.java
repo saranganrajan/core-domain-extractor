@@ -34,19 +34,24 @@ public class CsvFileExtractor implements FileExtractor {
                 "\\Dataset\\to_process");
         File destinationFolder = new File("C:\\Users\\saran\\OneDrive\\Documents\\Sarangapani\\Upgrad\\Thesis\\Implementation" +
                 "\\Dataset\\processed");
+        log.info("Processing files from {}", sourceFolder.getName());
         if(sourceFolder.isDirectory()) {
+            log.info("Started Processing.....");
             File[] processableFiles = sourceFolder.listFiles();
             if(processableFiles == null || processableFiles.length == 0) {
                 log.info("No files to process");
                 return;
             }
             for(File policyFile : processableFiles) {
+                log.info("Processing file {}", policyFile.getName());
                 try (BufferedReader in = new BufferedReader(new FileReader(policyFile))) {
                     List<PolicyTransaction> policies = in.lines().skip(1).map(line -> {
                         String[] x = pattern.split(line);
                         return new PolicyTransaction(x[0],  Double.parseDouble(x[1]), LocalDate.parse(x[2], formatter), x[3]);
                     }).collect(Collectors.toList());
-                    System.out.println(feignClient.processPolicyTransaction(policies));
+                    log.info("Sending {} policies to be processed", policies.size());
+                    feignClient.processPolicyTransaction(policies);
+                    log.info("Successfully processed file {}", policyFile.getName());
                 } catch (IOException e) {
                     log.error("Error while processing file {}", policyFile.getName());
                     e.printStackTrace();
