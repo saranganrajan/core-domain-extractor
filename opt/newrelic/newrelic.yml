@@ -147,7 +147,7 @@ common: &default_settings
   # from a proxy server. Proxy scheme will allow the agent to
   # connect through proxies using the HTTPS scheme.
   #proxy_host: hostname
-  #proxy_port: 8080
+  proxy_port: 8081
   #proxy_user: username
   #proxy_password: password
   #proxy_scheme: https

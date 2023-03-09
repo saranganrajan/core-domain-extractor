@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name="core-domain-processor", url="http://20.120.52.99:8085")
+@FeignClient(name="core-domain-processor", url="http://localhost:8085")
 public interface CoreProcessFeignClient {
     @PostMapping(path = "/policy/premium/pay")
     ResponseEntity<List<PolicyTransaction>> processPolicyTransaction(@RequestBody List<PolicyTransaction> policies);
